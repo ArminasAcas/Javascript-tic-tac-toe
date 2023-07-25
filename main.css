@@ -1,0 +1,46 @@
+body {
+    margin: auto;
+    background-color: #bfbfbf;
+}
+
+.game {
+    margin: 0 10% 0 10%;
+}
+
+.game__score {
+    text-align: center;
+    margin: 25px 20% 0 20%;
+    font-weight: bold;
+}
+
+.game__score-information {
+    text-align: center;
+    font-size: 26px;
+}
+
+.game__score-block {
+    margin: 25px 0; 
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 22px;
+}
+
+.game__score-display {
+    width: 50%;
+    line-height: 1.5;
+}
+
+.game__score-display--player1 {
+    color: blue;
+}
+
+.game__score-display--player2 {
+    color: red;;
+}
+
+.game__board {
+    
+}
+
+.game__options {
+}
