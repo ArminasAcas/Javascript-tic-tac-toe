@@ -1,6 +1,6 @@
 body {
     margin: auto;
-    background-color: #bfbfbf;
+    background-color: #b8b8b8;
 }
 
 .game {
@@ -15,19 +15,29 @@ body {
 
 .game__score-information {
     text-align: center;
-    font-size: 26px;
+    font-size: 30px;
+    background-color: #f5f5f5;
+    border-radius: 5%;
+    outline: solid 2px;
 }
 
 .game__score-block {
     margin: 25px 0; 
     display: flex;
     flex-wrap: wrap;
-    font-size: 22px;
+    justify-content: space-around;
+    font-size: 25px;
+}
+
+.game__score-block span {
+    background-color: #f5f5f5;
+    border-radius: 5%;
+    outline: solid 2px;
 }
 
 .game__score-display {
-    width: 50%;
-    line-height: 1.5;
+    width: 40%;
+    line-height: 1.4;
 }
 
 .game__score-display--player1 {
@@ -38,8 +48,65 @@ body {
     color: red;;
 }
 
+.game__board-space {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .game__board {
-    
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0 0 0;
+    background-color: #f5f5f5;
+    width: 450px;
+    height: 450px;
+    border-radius: 5%;
+    padding: 20px;
+    outline: solid 2px;
+    box-shadow:
+    0px 0px 1.7px rgba(0, 0, 0, 0.124),
+    0px 0px 4.3px rgba(0, 0, 0, 0.177),
+    0px 0px 8.9px rgba(0, 0, 0, 0.223),
+    0px 0px 18.3px rgba(0, 0, 0, 0.276),
+    0px 0px 50px rgba(0, 0, 0, 0.4);
+}
+
+.game__board div{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 5%;
+    font-family: cursive;
+    font-size: 60px;
+}
+
+.game__board div:hover{
+    background-color: #dedede;
+}
+
+.game__board div:active{
+    background-color: #c7c7c7;
+}
+
+
+.game__line--top {
+    border-top: solid 2px;
+}
+
+.game__line--right {
+    border-right: solid 2px;
+}
+
+.game__line--bottom {
+    border-bottom: solid 2px;
+}
+
+.game__line--left {
+    border-left: solid 2px;
 }
 
 .game__options {
