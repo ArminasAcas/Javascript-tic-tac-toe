@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <title>Javascript tic-tac-toe</title>
         <link rel="stylesheet" href="main.css">
-        <script src="Javascript/script.js"></script>
+        <script src="Javascript/game.js"></script>
+        <script src="Javascript/main.js"></script>
     </head>
 
     <body>
@@ -22,15 +23,15 @@
 
             <div class="game__board-space">
                 <div class="game__board">
-                    <div class="game__line--right game__line--bottom"></div>
-                    <div class="game__line--left game__line--bottom game__line--right"></div>
-                    <div class="game__line--left game__line--bottom"></div>
-                    <div class="game__line--top game__line--right game__line--bottom"></div>
-                    <div class="game__line--top game__line--right game__line--bottom game__line--left"></div>
-                    <div class="game__line--top game__line--left game__line--bottom"></div>
-                    <div class="game__line--top game__line--right"></div>
-                    <div class="game__line--top game__line--left game__line--right"></div>
-                    <div class="game__line--left     game__line--top"></div>
+                    <div data-cell class="game__line--right game__line--bottom"></div>
+                    <div data-cell class="game__line--left game__line--bottom game__line--right"></div>
+                    <div data-cell class="game__line--left game__line--bottom"></div>
+                    <div data-cell class="game__line--top game__line--right game__line--bottom"></div>
+                    <div data-cell class="game__line--top game__line--right game__line--bottom game__line--left"></div>
+                    <div data-cell class="game__line--top game__line--left game__line--bottom"></div>
+                    <div data-cell class="game__line--top game__line--right"></div>
+                    <div data-cell class="game__line--top game__line--left game__line--right"></div>
+                    <div data-cell class="game__line--left     game__line--top"></div>
                 </div>
             </div>
             
