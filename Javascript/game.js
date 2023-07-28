@@ -17,7 +17,7 @@ class Game {
 
         this.drawSymbol(row,column,"x","blue");
         if (this.playersTurn !== 0) this.playersTurn = 2; 
-        setTimeout( () => this.aiTurn(), 1000);
+        setTimeout( () => this.aiTurn(), 750);
     }
 
     drawSymbol(row, column, symbol, color)
@@ -32,7 +32,7 @@ class Game {
     aiTurn() 
     {
         if(this.playersTurn !== 2) return;
-        let freeCells = this.findFreeCells(this.cells);
+        let freeCells = this.findFreeCells();
         if (freeCells.length === 0) return;
 
         let targetCell = 0;
@@ -40,7 +40,7 @@ class Game {
         let row = this.calculateRow(targetCell);
         let column = this.calculateColumn(targetCell,row);
         this.drawSymbol(row,column,"o","red");
-        this.playersTurn = 1;
+        if(this.playersTurn !== 0) this.playersTurn = 1;
     }
 
     checkWinCondditions(symbol) {
@@ -53,7 +53,11 @@ class Game {
                 if (symbol === this.cellArray[i][u]) symbolCount++;
             }
 
-            if (symbolCount === 3) this.setVictory(this.playersTurn);
+            if (symbolCount === 3)
+            {
+                this.setVictory(this.playersTurn);
+                return;
+            } 
         }
 
         for (let i = 0; i < this.cellArray.length; i++)
@@ -64,21 +68,38 @@ class Game {
                 if (symbol === this.cellArray[u][i]) symbolCount++;
             }
 
-            if (symbolCount === 3) this.setVictory(this.playersTurn);
+            if (symbolCount === 3)
+            {
+                this.setVictory(this.playersTurn);
+                return;
+            } 
         }
 
         symbolCount = 0;
         for (let i = 0; i < this.cellArray.length; i++)
         {
             if (symbol === this.cellArray[i][i]) symbolCount++;
-            if (symbolCount === 3) this.setVictory(this.playersTurn);
+            if (symbolCount === 3)
+            {
+                this.setVictory(this.playersTurn);
+                return;
+            } 
         }
 
         symbolCount = 0;
         for (let i = 0, u = 2; i < this.cellArray.length; i++, u--) 
         {
             if (symbol === this.cellArray[u][i]) symbolCount++;
-            if (symbolCount === 3) this.setVictory(this.playersTurn);
+            if (symbolCount === 3)
+            {
+                this.setVictory(this.playersTurn);
+                return;
+            } 
+        }
+
+        if (this.findFreeCells().length  === 0) 
+        {
+            this.setDraw();
         }
     }
 
@@ -86,7 +107,7 @@ class Game {
     {
         this.playersTurn = 0;
         setTimeout( () => this.displayVictory(player), 2000);  
-        setTimeout( () => this.restartGame(), 5000);    
+        setTimeout( () => this.restartGame(), 4000);    
     }
 
     displayVictory(player)
@@ -108,17 +129,32 @@ class Game {
             this.playerTwoScore.innerHTML = parseInt(this.playerTwoScore.innerHTML) + 1;
         }
     }
-    displayBoard()
+
+    displayGameBoard()
     {
         this.gamestatus.style.display = "none";
         this.cells.forEach(cell => {
             cell.style.display = "flex";
         }); 
     }
+
     setDraw()
     {
-
+        this.playersTurn = 0;
+        setTimeout( () => this.displayDraw(), 2000);  
+        setTimeout( () => this.restartGame(), 4000);    
     }
+
+    displayDraw()
+    {
+        this.gamestatus.style.display = "flex";
+        this.gamestatus.innerHTML = "It's a draw"
+        this.cells.forEach(cell => {
+            cell.style.display = "none";
+        });
+        this.gamestatus.style.color = "black";
+    }
+
     restartGame()
     {
         this.playersTurn = 1;
@@ -132,13 +168,13 @@ class Game {
             cell.style.color ="black";
         })
 
-        this.displayBoard();
+        this.displayGameBoard();
     }
 
-    findFreeCells(cells)
+    findFreeCells()
     {
         let free = [];
-        cells.forEach((cell, index) => {
+        this.cells.forEach((cell, index) => {
             if (cell.innerHTML === "") free.push(index);
         }); 
         return free;
