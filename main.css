@@ -92,6 +92,13 @@ body {
     background-color: #c7c7c7;
 }
 
+.game__status {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 
 .game__line--top {
     border-top: solid 2px;

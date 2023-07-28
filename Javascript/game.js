@@ -1,10 +1,13 @@
 class Game {
-    constructor(cells){
+    constructor(cells,gamestatus, playerOneScore, playerTwoScore){
         this.cellArray = new Array(3);
         for (let i = 0; i < this.cellArray.length; i++) this.cellArray[i] = new Array(3).fill(" "); 
         this.playerNumbers = 1;
         this.playersTurn = 1;
+        this.gamestatus = gamestatus
         this.cells = cells;
+        this.playerOneScore = playerOneScore;
+        this.playerTwoScore = playerTwoScore;
     }
 
     cellClicked(row, column) {
@@ -13,7 +16,7 @@ class Game {
         if (this.playersTurn !== 1) return;
 
         this.drawSymbol(row,column,"x","blue");
-        this.playersTurn = 2; 
+        if (this.playersTurn !== 0) this.playersTurn = 2; 
         setTimeout( () => this.aiTurn(), 1000);
     }
 
@@ -23,10 +26,12 @@ class Game {
         if (!this.cells) return;
         this.cells[row * 3 + column].innerHTML = symbol;
         this.cells[row * 3 + column].style.color = color;
+        this.checkWinCondditions(symbol);
     }
 
     aiTurn() 
     {
+        if(this.playersTurn !== 2) return;
         let freeCells = this.findFreeCells(this.cells);
         if (freeCells.length === 0) return;
 
@@ -36,6 +41,98 @@ class Game {
         let column = this.calculateColumn(targetCell,row);
         this.drawSymbol(row,column,"o","red");
         this.playersTurn = 1;
+    }
+
+    checkWinCondditions(symbol) {
+        let symbolCount = 0;
+        for (let i = 0; i < this.cellArray.length; i++)
+        {
+            symbolCount = 0;
+            for (let u = 0; u < this.cellArray[i].length; u++)
+            {
+                if (symbol === this.cellArray[i][u]) symbolCount++;
+            }
+
+            if (symbolCount === 3) this.setVictory(this.playersTurn);
+        }
+
+        for (let i = 0; i < this.cellArray.length; i++)
+        {
+            symbolCount = 0;
+            for (let u = 0; u < this.cellArray[i].length; u++)
+            {
+                if (symbol === this.cellArray[u][i]) symbolCount++;
+            }
+
+            if (symbolCount === 3) this.setVictory(this.playersTurn);
+        }
+
+        symbolCount = 0;
+        for (let i = 0; i < this.cellArray.length; i++)
+        {
+            if (symbol === this.cellArray[i][i]) symbolCount++;
+            if (symbolCount === 3) this.setVictory(this.playersTurn);
+        }
+
+        symbolCount = 0;
+        for (let i = 0, u = 2; i < this.cellArray.length; i++, u--) 
+        {
+            if (symbol === this.cellArray[u][i]) symbolCount++;
+            if (symbolCount === 3) this.setVictory(this.playersTurn);
+        }
+    }
+
+    setVictory(player)
+    {
+        this.playersTurn = 0;
+        setTimeout( () => this.displayVictory(player), 2000);  
+        setTimeout( () => this.restartGame(), 5000);    
+    }
+
+    displayVictory(player)
+    {
+        this.gamestatus.style.display = "flex";
+        this.gamestatus.innerHTML = "Player " + player + " has won the round";
+        this.cells.forEach(cell => {
+            cell.style.display = "none";
+        });
+
+        if (player === 1) 
+        {
+            this.gamestatus.style.color = "blue";
+            this.playerOneScore.innerHTML = parseInt(this.playerOneScore.innerHTML) + 1;
+        }
+        else 
+        {
+            this.gamestatus.style.color = "red";
+            this.playerTwoScore.innerHTML = parseInt(this.playerTwoScore.innerHTML) + 1;
+        }
+    }
+    displayBoard()
+    {
+        this.gamestatus.style.display = "none";
+        this.cells.forEach(cell => {
+            cell.style.display = "flex";
+        }); 
+    }
+    setDraw()
+    {
+
+    }
+    restartGame()
+    {
+        this.playersTurn = 1;
+        for (let i = 0; i < this.cellArray.length; i++)
+        {
+            for (let u = 0; u < this.cellArray[i].length; u++) this.cellArray[i][u] = " ";
+        }
+
+        this.cells.forEach(cell => {
+            cell.innerHTML = "";
+            cell.style.color ="black";
+        })
+
+        this.displayBoard();
     }
 
     findFreeCells(cells)
