@@ -1,44 +1,65 @@
 class Game {
-    constructor(){
-        this.cells = new Array(3);
-        for (let i = 0; i < this.cells.length; i++) this.cells[i] = new Array(3).fill(" "); 
+    constructor(cells){
+        this.cellArray = new Array(3);
+        for (let i = 0; i < this.cellArray.length; i++) this.cellArray[i] = new Array(3).fill(" "); 
         this.playerNumbers = 1;
+        this.playersTurn = 1;
+        this.cells = cells;
     }
 
     cellClicked(row, column) {
-        if(this.playerNumbers !== 1) return;
-        if (this.cells[row][column] !== " ") return; 
-        this.drawSymbol(row,column,"x");
-        setTimeout( () => this.aiDrawSymbol(), 1000); 
+        if (this.playerNumbers !== 1) return;
+        if (this.cellArray[row][column] !== " ") return; 
+        if (this.playersTurn !== 1) return;
+
+        this.drawSymbol(row,column,"x","blue");
+        this.playersTurn = 2; 
+        setTimeout( () => this.aiTurn(), 1000);
     }
 
-    drawSymbol(row, column, symbol)
+    drawSymbol(row, column, symbol, color)
     {
-        this.cells[row][column] = symbol;
-        let cells = document.querySelectorAll("[data-cell]");
-        cells[row * 3 + column].innerHTML = symbol;
+        this.cellArray[row][column] = symbol;
+        if (!this.cells) return;
+        this.cells[row * 3 + column].innerHTML = symbol;
+        this.cells[row * 3 + column].style.color = color;
     }
 
-    aiDrawSymbol() 
+    aiTurn() 
     {
-        let cells = document.querySelectorAll("[data-cell]");
+        let freeCells = this.findFreeCells(this.cells);
+        if (freeCells.length === 0) return;
+
+        let targetCell = 0;
+        if (freeCells.length > 1) targetCell = freeCells[this.randomCellPick(freeCells.length)];
+        let row = this.calculateRow(targetCell);
+        let column = this.calculateColumn(targetCell,row);
+        this.drawSymbol(row,column,"o","red");
+        this.playersTurn = 1;
+    }
+
+    findFreeCells(cells)
+    {
         let free = [];
         cells.forEach((cell, index) => {
             if (cell.innerHTML === "") free.push(index);
         }); 
-        
-        if (free.length === 0) return;
-        let freeCells = free.length;
-        let targetCell = 0;
-        if (freeCells > 1) targetCell = free[this.randomInteger(freeCells)];
-        let row = Math.floor((targetCell)/ 3);
-        let collumn = targetCell - row * 3;
-        this.drawSymbol(row,collumn,"o");
+        return free;
     }
 
-    randomInteger(max) 
+    randomCellPick(max) 
     {
         return Math.round(Math.random() * (max-1));
+    }
+
+    calculateRow(index)
+    {
+        return Math.floor(index /3);
+    }
+
+    calculateColumn(index, row)
+    {
+        return index - row * 3;
     }
 
 }

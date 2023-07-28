@@ -1,17 +1,14 @@
 document.addEventListener("DOMContentLoaded", function(){
-    let game = new Game;
-
     let cells = document.querySelectorAll("[data-cell]");
+    if (!cells) return;
 
-    if (cells)
-    {
-        cells.forEach((cell, index) => {
-            cell.addEventListener("click", () => {
-    
-                let row = Math.floor((index )/ 3);
-                let collumn = index - row * 3;
-                game.cellClicked(row,collumn);
-            });
+    let game = new Game(cells);
+
+    cells.forEach((cell, index) => {
+        cell.addEventListener("click", () => {
+            let row = game.calculateRow(index);
+            let column = game.calculateColumn(index,row);
+            game.cellClicked(row,column);
         });
-    }
+    });
 })
