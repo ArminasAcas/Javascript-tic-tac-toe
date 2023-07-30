@@ -17,15 +17,18 @@ class Game {
 
         this.drawSymbol(row,column,"x","blue");
         if (this.playersTurn !== 0) this.playersTurn = 2; 
-        setTimeout( () => this.aiTurn(), 750);
+        setTimeout( () => this.aiTurn(), 1000);
     }
 
     drawSymbol(row, column, symbol, color)
     {
         this.cellArray[row][column] = symbol;
         if (!this.cells) return;
-        this.cells[row * 3 + column].innerHTML = symbol;
-        this.cells[row * 3 + column].style.color = color;
+        let cellIndex = row * 3 + column;
+        this.cells[cellIndex].innerHTML = symbol;
+        this.cells[cellIndex].style.color = color;
+        this.cells[cellIndex].style.fontSize = "1px";
+        let interval = setInterval(() =>this.increaseCellFontSize(cellIndex,interval),10);
         this.checkWinCondditions(symbol);
     }
 
@@ -193,6 +196,13 @@ class Game {
     calculateColumn(index, row)
     {
         return index - row * 3;
+    }
+
+    increaseCellFontSize(cellIndex, interval)
+    {
+        let fontsize = parseInt(this.cells[cellIndex].style.fontSize);
+        if (fontsize >= 60) clearInterval(interval);
+        this.cells[cellIndex].style.fontSize = fontsize + 1 + "px";
     }
 
 }

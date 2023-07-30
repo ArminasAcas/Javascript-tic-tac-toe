@@ -81,7 +81,6 @@ body {
     box-sizing: border-box;
     border-radius: 5%;
     font-family: cursive;
-    font-size: 60px;
 }
 
 .game__board div:hover{
