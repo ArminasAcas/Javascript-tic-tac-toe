@@ -15,7 +15,7 @@
                 
                 <div class="game__score-block">
                         <span class="game__score-display game__score-display--player1">Player 1</span>
-                        <span class="game__score-display game__score-display--player2">Player 2</span>
+                        <span data-playerTwoName class="game__score-display game__score-display--player2">Player 2 (AI)</span>
                         <span data-playerOneScore class="game__score-display game__score-display--player1">0</span>
                         <span data-playerTwoScore class="game__score-display game__score-display--player2">0</span>
                 </div>
@@ -33,10 +33,12 @@
                     <div data-cell class="game__line--top game__line--left game__line--right"></div>
                     <div data-cell class="game__line--left     game__line--top"></div>
                     <h1 class="game__status"> Player 1 has won the match</h1>
+                </div>
             </div>
-            
 
-            <div class="game_options">
+            <div class="game__options">
+                <button data-onePlayerButton class="game__buttons"> 1 Player </button>
+                <button data-twoPlayersButton class="game__buttons"> 2 Players </button>
             </div>
         </div>
     </body>

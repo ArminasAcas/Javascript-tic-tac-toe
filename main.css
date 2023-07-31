@@ -9,7 +9,7 @@ body {
 
 .game__score {
     text-align: center;
-    margin: 25px 20% 0 20%;
+    margin: 20px 20% 0 20%;
     font-weight: bold;
 }
 
@@ -22,7 +22,7 @@ body {
 }
 
 .game__score-block {
-    margin: 25px 0; 
+    margin: 20px 0 0 0; 
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -57,7 +57,7 @@ body {
 .game__board {
     display: flex;
     flex-wrap: wrap;
-    margin: 20px 0 0 0;
+    margin: 25px 0 0 0;
     background-color: #f5f5f5;
     width: 450px;
     height: 450px;
@@ -65,11 +65,10 @@ body {
     padding: 20px;
     outline: solid 2px;
     box-shadow:
-    0px 0px 1.7px rgba(0, 0, 0, 0.124),
-    0px 0px 4.3px rgba(0, 0, 0, 0.177),
-    0px 0px 8.9px rgba(0, 0, 0, 0.223),
-    0px 0px 18.3px rgba(0, 0, 0, 0.276),
-    0px 0px 50px rgba(0, 0, 0, 0.4);
+    0px 0px 1.1px rgba(0, 0, 0, 0.139),
+    0px 0px 3px rgba(0, 0, 0, 0.2),
+    0px 0px 7.2px rgba(0, 0, 0, 0.261),
+    0px 0px 24px rgba(0, 0, 0, 0.4);
 }
 
 .game__board div{
@@ -116,4 +115,19 @@ body {
 }
 
 .game__options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    font-size: 30px;
+    background-color: #f5f5f5;
+    border-radius: 5%;
+    outline: solid 2px;
+    margin: 25px 30% 0 30%;
+    padding: 10px;
+}
+
+.game__buttons {
+    font-size: 25px;
+    padding: 0 5% 0 5%;
 }

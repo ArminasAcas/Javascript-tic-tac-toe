@@ -1,5 +1,5 @@
 class Game {
-    constructor(cells,gamestatus, playerOneScore, playerTwoScore){
+    constructor(cells,gamestatus, playerOneScore, playerTwoScore, playerTwoName){
         this.cellArray = new Array(3);
         for (let i = 0; i < this.cellArray.length; i++) this.cellArray[i] = new Array(3).fill(" "); 
         this.playerNumbers = 1;
@@ -8,16 +8,25 @@ class Game {
         this.cells = cells;
         this.playerOneScore = playerOneScore;
         this.playerTwoScore = playerTwoScore;
+        this.playerTwoName = playerTwoName;
     }
 
     cellClicked(row, column) {
-        if (this.playerNumbers !== 1) return;
         if (this.cellArray[row][column] !== " ") return; 
-        if (this.playersTurn !== 1) return;
+        if (this.playersTurn === 0) return;
 
-        this.drawSymbol(row,column,"x","blue");
-        if (this.playersTurn !== 0) this.playersTurn = 2; 
-        setTimeout( () => this.aiTurn(), 1000);
+        if(this.playersTurn === 1)
+        {
+            this.drawSymbol(row,column,"X","blue");
+            if (this.playersTurn !== 0) this.playersTurn = 2;
+        } 
+        else if(this.playersTurn === 2 && this.playerNumbers === 2)
+        {
+            this.drawSymbol(row,column,"O","red");
+            if (this.playersTurn !== 0) this.playersTurn = 1;
+        } 
+
+        if (this.playerNumbers === 1 && this.playersTurn !== 0)setTimeout( () => this.aiTurn(), 1000);
     }
 
     drawSymbol(row, column, symbol, color)
@@ -42,7 +51,7 @@ class Game {
         if (freeCells.length > 1) targetCell = freeCells[this.randomCellPick(freeCells.length)];
         let row = this.calculateRow(targetCell);
         let column = this.calculateColumn(targetCell,row);
-        this.drawSymbol(row,column,"o","red");
+        this.drawSymbol(row,column,"O","red");
         if(this.playersTurn !== 0) this.playersTurn = 1;
     }
 
@@ -133,6 +142,12 @@ class Game {
         }
     }
 
+    resetScore()
+    {
+        this.playerOneScore.innerHTML = 0;
+        this.playerTwoScore.innerHTML = 0;
+    }
+
     displayGameBoard()
     {
         this.gamestatus.style.display = "none";
@@ -201,8 +216,24 @@ class Game {
     increaseCellFontSize(cellIndex, interval)
     {
         let fontsize = parseInt(this.cells[cellIndex].style.fontSize);
-        if (fontsize >= 60) clearInterval(interval);
+        if (fontsize >= 50) clearInterval(interval);
         this.cells[cellIndex].style.fontSize = fontsize + 1 + "px";
+    }
+
+    setOnePlayerMode()
+    {
+        this.playerNumbers = 1;
+        this.playerTwoName.innerHTML = "Player 2 (AI)";
+        this.resetScore();
+        this.restartGame();
+    }
+
+    setTwoPlayerMode()
+    {
+        this.playerNumbers = 2;
+        this.playerTwoName.innerHTML = "Player 2";
+        this.resetScore();
+        this.restartGame();
     }
 
 }

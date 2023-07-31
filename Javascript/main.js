@@ -3,9 +3,12 @@ document.addEventListener("DOMContentLoaded", function(){
     let gamestatus = document.querySelector(".game__status");
     let playerOneScore = document.querySelector("[data-playerOneScore]");
     let playerTwoScore = document.querySelector("[data-playerTwoScore]");
-    if (!cells || !gamestatus || !playerOneScore || !playerTwoScore) return;
+    let onePlayerButton = document.querySelector("[data-onePlayerButton]");
+    let twoPlayersButton = document.querySelector("[data-twoPlayersButton]");
+    let playerTwoName = document.querySelector("[data-playerTwoName]");
+    if (!cells || !gamestatus || !playerOneScore || !playerTwoScore || !onePlayerButton || !twoPlayersButton || !playerTwoName) return;
 
-    let game = new Game(cells,gamestatus,playerOneScore, playerTwoScore);
+    let game = new Game(cells,gamestatus,playerOneScore, playerTwoScore, playerTwoName);
 
     cells.forEach((cell, index) => {
         cell.addEventListener("click", () => {
@@ -13,5 +16,13 @@ document.addEventListener("DOMContentLoaded", function(){
             let column = game.calculateColumn(index,row);
             game.cellClicked(row,column);
         });
+    });
+
+    onePlayerButton.addEventListener("click", () => {
+        game.setOnePlayerMode();
+    });
+
+    twoPlayersButton.addEventListener("click", () => {
+        game.setTwoPlayerMode();
     });
 })
