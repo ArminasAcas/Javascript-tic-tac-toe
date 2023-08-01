@@ -26,7 +26,7 @@ class Game {
             if (this.playersTurn !== 0) this.playersTurn = 1;
         } 
 
-        if (this.playerNumbers === 1 && this.playersTurn !== 0)setTimeout( () => this.aiTurn(), 1000);
+        if (this.playerNumbers === 1 && this.playersTurn !== 0) setTimeout( () => this.aiTurn(), 1000);
     }
 
     drawSymbol(row, column, symbol, color)
@@ -46,7 +46,6 @@ class Game {
         if(this.playersTurn !== 2) return;
         let freeCells = this.findFreeCells();
         if (freeCells.length === 0) return;
-
         let targetCell = 0;
         if (freeCells.length > 1) targetCell = freeCells[this.randomCellPick(freeCells.length)];
         let row = this.calculateRow(targetCell);
@@ -56,10 +55,10 @@ class Game {
     }
 
     checkWinCondditions(symbol) {
-        let symbolCount = 0;
+
         for (let i = 0; i < this.cellArray.length; i++)
         {
-            symbolCount = 0;
+            let symbolCount = 0;
             for (let u = 0; u < this.cellArray[i].length; u++)
             {
                 if (symbol === this.cellArray[i][u]) symbolCount++;
@@ -74,7 +73,7 @@ class Game {
 
         for (let i = 0; i < this.cellArray.length; i++)
         {
-            symbolCount = 0;
+            let symbolCount = 0;
             for (let u = 0; u < this.cellArray[i].length; u++)
             {
                 if (symbol === this.cellArray[u][i]) symbolCount++;
@@ -87,8 +86,7 @@ class Game {
             } 
         }
 
-        symbolCount = 0;
-        for (let i = 0; i < this.cellArray.length; i++)
+        for (let i = 0, symbolCount = 0; i < this.cellArray.length; i++)
         {
             if (symbol === this.cellArray[i][i]) symbolCount++;
             if (symbolCount === 3)
@@ -98,8 +96,7 @@ class Game {
             } 
         }
 
-        symbolCount = 0;
-        for (let i = 0, u = 2; i < this.cellArray.length; i++, u--) 
+        for (let i = 0, u = 2, symbolCount = 0; i < this.cellArray.length; i++, u--) 
         {
             if (symbol === this.cellArray[u][i]) symbolCount++;
             if (symbolCount === 3)

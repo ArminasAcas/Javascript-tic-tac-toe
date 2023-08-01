@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     let game = new Game(cells,gamestatus,playerOneScore, playerTwoScore, playerTwoName);
 
+    if (!game) return;
+    
     cells.forEach((cell, index) => {
         cell.addEventListener("click", () => {
             let row = game.calculateRow(index);
