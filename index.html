@@ -3,25 +3,28 @@
     <head>
         <meta charset="UTF-8">
         <title>Javascript tic-tac-toe</title>
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="Css/main.css">
+        <link rel="stylesheet" href="Css/score.css">
+        <link rel="stylesheet" href="Css/game.css">
+        <link rel="stylesheet" href="Css/options.css">
         <script src="Javascript/game.js"></script>
         <script src="Javascript/main.js"></script>
     </head>
 
     <body>
-        <div class="game">
-            <div class="game__score">
-                <div class="game__score-information">Score</div>
+        <div class="container">
+            <div class="score">
+                <div class="score__information">Score</div>
                 
-                <div class="game__score-block">
-                        <span class="game__score-display game__score-display--player1">Player 1</span>
-                        <span data-playerTwoName class="game__score-display game__score-display--player2">Player 2 (AI)</span>
-                        <span data-playerOneScore class="game__score-display game__score-display--player1">0</span>
-                        <span data-playerTwoScore class="game__score-display game__score-display--player2">0</span>
+                <div class="score__block">
+                        <span class="score__display score__display--player1">Player 1</span>
+                        <span data-playerTwoName class="score__display score__display--player2">Player 2 (AI)</span>
+                        <span data-playerOneScore class="score__display score__display--player1">0</span>
+                        <span data-playerTwoScore class="score__display score__display--player2">0</span>
                 </div>
             </div>
 
-            <div class="game__board-space">
+            <div class="game__container">
                 <div class="game__board">
                     <div data-cell class="game__line--right game__line--bottom"></div>
                     <div data-cell class="game__line--left game__line--bottom game__line--right"></div>
@@ -36,9 +39,9 @@
                 </div>
             </div>
 
-            <div class="game__options">
-                <button data-onePlayerButton class="game__buttons"> 1 Player </button>
-                <button data-twoPlayersButton class="game__buttons"> 2 Players </button>
+            <div class="options">
+                <button data-onePlayerButton class="options__buttons"> 1 Player </button>
+                <button data-twoPlayersButton class="options__buttons"> 2 Players </button>
             </div>
         </div>
     </body>

@@ -1,0 +1,40 @@
+.score {
+    text-align: center;
+    margin: 20px 20% 0 20%;
+    font-weight: bold;
+}
+
+.score__information {
+    text-align: center;
+    font-size: 30px;
+    background-color: #f5f5f5;
+    border-radius: 5%;
+    outline: solid 2px;
+}
+
+.score__block {
+    margin: 20px 0 0 0; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 25px;
+}
+
+.score__block span {
+    background-color: #f5f5f5;
+    border-radius: 5%;
+    outline: solid 2px;
+}
+
+.score__display {
+    width: 40%;
+    line-height: 1.4;
+}
+
+.score__display--player1 {
+    color: blue;
+}
+
+.score__display--player2 {
+    color: red;;
+}
